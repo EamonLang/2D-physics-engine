@@ -4,12 +4,11 @@ I am following this article about how to create a physics engine in c++ however 
 
 Link for article: https://winter.dev/articles/physics-engine
 
-I am going to implement pygame to render an actual screen and move objects around visually instead of just looking at coordinates in the terminal. Additionally in the future I hope to create my own sandbox allowing me to apply forces and create objects. Possibly within tkinter or pygame depending on what I want to render on.
-
-*Its important to note that currently window.py is not functional and only engine.py works. This should be fixed soon once I connect them. They are not connected because I originally created an old engine that wasnt great and instead of making a new folder I just restarted.
+You can use the window.py to render the engine aslong as you have pygame installed. Additionally in the future I hope to create my own sandbox allowing me to apply forces and create objects. Possibly within tkinter or pygame depending on what I want to render on.
 
 NEXT STEPS:
-    - collisions
-    - collision responses
+    - multiple elements
+    - friction
+    - fluids
     - sandbox
     - c++??
