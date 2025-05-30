@@ -44,16 +44,27 @@ class VectorMath:
 
     pass
 class World(VectorMath):
-    def __init__(self,objects):
+    def __init__(self,objects,width,height):
         super().__init__()
         self.objects = [obj for obj in objects]
+        # height and width define the boundaries of the world
+        self.width = width
+        self.height = height
 
     pass
 
     def step(self,dt):
         # force of gravity
-        f_gravity = (0,-9.8)
+        f_gravity = (0,9.8)
         for obj in self.objects:
+            # check to see if object is within the world boundaries or if there is a collision
+            if obj.position[0] <= 0 or obj.position[0] >= self.width:
+                obj.velocity = (-1 * obj.velocity[0],obj.velocity[1])
+            elif obj.position[1] <= 0 or obj.position[1] >= self.height:
+                obj.velocity = (obj.velocity[0], -1*obj.velocity[1])
+
+
+
             # force of gravity            
             obj.force = self.multiply_scalar(f_gravity,obj.mass)
 
@@ -64,18 +75,18 @@ class World(VectorMath):
             obj.force = (0,0)
 
 
-obj  = Object((0,0),(0,0),1,(0,0))
-earth = World([obj])
+# obj  = Object((0,0),(0,0),1,(0,0))
+# earth = World([obj])
 
-earth.step(1)
+# earth.step(1)
 
-run = True
-start_time = time.time()
-while run:
-    dt = time.time()
-    earth.step(dt)
-    print(obj.position)
-    start_time = dt
+# run = True
+# start_time = time.time()
+# while run:
+#     dt = time.time()
+#     earth.step(dt)
+#     print(obj.position)
+#     start_time = dt
 
 
 
