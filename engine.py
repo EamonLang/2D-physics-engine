@@ -95,44 +95,6 @@ class VectorMath:
         obj2.velocity = (final_normal_velocity_vector_obj2[0]+final_tangential_velocity_vector_obj2[0] , final_normal_velocity_vector_obj2[1]+ final_tangential_velocity_vector_obj2[1])
 
 
-        # if length_of_normal != 0:
-        #     normal = (normal[0]/length_of_normal,normal[1]/length_of_normal)
-        #     # find relative velocity between the two obkects
-
-        #     relative_velocity = (obj1.velocity[0]-obj2.velocity[0],obj1.velocity[1]-obj2.velocity[1])
-
-        #     # then find relative velocity along normal
-        #     relative_velocity_along_normal = relative_velocity[0] *normal[0] +relative_velocity[1] *normal[1]
-
-           
-        #     if relative_velocity_along_normal >0:
-        #         return #if the objects are not moving towards eachother then dont resolve
-            
-        #     #define coefficient of resitution. This determines how elastic the collision is.
-        #     e=0.5
-
-        #     # find impulse scalar
-        #     j = -(1+e) *relative_velocity_along_normal
-            
-        #     j /= (1/obj1.mass) + (1/obj2.mass)
-
-        #     # then find impulse
-
-        #     impulse = (j*normal[0],j*normal[1])
-
-        #     # then apply impulse to velocities
-
-        #     obj1.velocity = ((obj1.velocity[0]-impulse[0]), (obj1.velocity[1]-impulse[1]))
-
-        #     obj2.velocity = ((obj2.velocity[0]+impulse[0]), (obj2.velocity[1]+impulse[1]))
-
-
-
-    
-
-
-
-
 class World(VectorMath):
     def __init__(self,objects,width,height):
         super().__init__()
