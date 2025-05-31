@@ -2,11 +2,12 @@ import time
 
 class Object:
     # position,velocity, and force should all be tuples with 2 float numbers. One for x and one for y coordinates
-    def __init__(self,position,velocity,mass,force):
+    def __init__(self,position,velocity,mass,force,radius):
         self.position = position
         self.velocity = velocity
         self.mass = mass
         self.force = force
+        self.radius = radius
 
 # contain math functions that determine outcomes of actions
 
@@ -37,7 +38,15 @@ class VectorMath:
     @staticmethod
     def multiply_vector(pair1,pair2):
         return (pair1[0]*pair2[0],pair1[1]*pair2[1])
-
+    
+    @staticmethod
+    def check_for_collision(obj1,obj2):
+        both_radius = obj1.radius + obj2.radius
+        distance_between = (((obj1.position[0]-obj2.position[0])**2) + ((obj1.position[1] - obj2.position[1])**2))**0.5 # this long ass equation is just pythagorean theorem to find distance between the two center points of the objects
+        if distance_between<=both_radius:
+            return True
+        else:
+            return False
     
 
 
@@ -56,12 +65,19 @@ class World(VectorMath):
     def step(self,dt):
         # force of gravity
         f_gravity = (0,9.8)
-        for obj in self.objects:
-            # check to see if object is within the world boundaries or if there is a collision
+        for index,obj in enumerate(self.objects):
+            # check to see if object is within the world boundaries
             if obj.position[0] <= 0 or obj.position[0] >= self.width:
                 obj.velocity = (-1 * obj.velocity[0],obj.velocity[1])
             elif obj.position[1] <= 0 or obj.position[1] >= self.height:
                 obj.velocity = (obj.velocity[0], -1*obj.velocity[1])
+
+            
+            # check if there is a collision with the other objects
+            for object in self.objects[index+1:]:
+                collision = self.check_for_collision(obj,object)
+                if collision:
+                    print("True")
 
 
 
