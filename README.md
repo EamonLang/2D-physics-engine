@@ -4,10 +4,14 @@ I am following this article about how to create a physics engine in c++ however 
 
 Link for article: https://winter.dev/articles/physics-engine
 
+
+For object-object collisions the math I used was from this article: https://www.vobarian.com/collisions/2dcollisions2.pdf
+
+Currently the engine supports collision between to circles aswell as gravity. Next I would like incorporate more shapes aswell as develop my own math library.
+
 You can use the window.py to render the engine aslong as you have pygame installed. Additionally in the future I hope to create my own sandbox allowing me to apply forces and create objects. Possibly within tkinter or pygame depending on what I want to render on.
 
 NEXT STEPS:
-    - multiple elements
     - friction
     - fluids
     - sandbox

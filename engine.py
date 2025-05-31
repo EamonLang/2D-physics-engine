@@ -39,6 +39,8 @@ class VectorMath:
     def multiply_vector(pair1,pair2):
         return (pair1[0]*pair2[0],pair1[1]*pair2[1])
     
+
+    # collision detection
     @staticmethod
     def check_for_collision(obj1,obj2):
         both_radius = obj1.radius + obj2.radius
@@ -48,10 +50,89 @@ class VectorMath:
         else:
             return False
     
+    @staticmethod
+    def collision_resolution(obj1,obj2):
+        # 1. a) find normal vecotr. The vector between the two objects
+        normal = (obj1.position[0] - obj2.position[0],obj1.position[1]-obj2.position[1])
+
+        # 1. B) Find the unit vector
+        length = (normal[0]**2 +normal[1]**2)**0.5
+
+        unit_vector = (normal[0]/length,normal[1]/length)
+
+        # 1. C) Find unit tangent
+        unit_tangent = (-unit_vector[1],unit_vector[0])
+
+        # 2. Find scalar projections for both normal and tangential
+
+        # object 1
+        obj1_normal_velocity = obj1.velocity[0]*unit_vector[0] + obj1.velocity[1]*unit_vector[1]
+        obj1_tangential_velocity = obj1.velocity[0]*unit_tangent[0] + obj1.velocity[1]*unit_tangent[1]
+
+        # object 2
+        obj2_normal_velocity = obj2.velocity[0]*unit_vector[0] + obj2.velocity[1]*unit_vector[1]
+        obj2_tangential_velocity = obj2.velocity[0]*unit_tangent[0] + obj2.velocity[1]*unit_tangent[1]
+
+        # 3. Find new tangential and normal velocites. Since there is no friction tangential stays the same and we can use conservation of energy to solve for normal velocities
+
+        final_scalar_velocity_obj1 = (obj1_normal_velocity*(obj1.mass - obj2.mass) + 2*(obj2.mass*obj2_normal_velocity))/(obj1.mass+obj2.mass)
+        final_scalar_velocity_obj2 = (obj2_normal_velocity*(obj2.mass-obj1.mass)+(2*obj1.mass*obj1_normal_velocity))/(obj1.mass + obj2.mass)
+
+        # 4 Convert scalar normal and tangential to vectors
+
+        # obj1
+        final_normal_velocity_vector_obj1 = (final_scalar_velocity_obj1*unit_vector[0],final_scalar_velocity_obj1*unit_vector[1])
+        final_tangential_velocity_vector_obj1 = (obj1_tangential_velocity*unit_tangent[0],obj1_tangential_velocity*unit_tangent[1])
+
+        # obj2
+
+        final_normal_velocity_vector_obj2 = (final_scalar_velocity_obj2*unit_vector[0],final_scalar_velocity_obj2*unit_vector[1])
+        final_tangential_velocity_vector_obj2 = (obj2_tangential_velocity*unit_tangent[0],obj2_tangential_velocity*unit_tangent[1])
+
+        # 5. Sum normal and tangent so that you return back to x and y components
+
+        obj1.velocity = (final_normal_velocity_vector_obj1[0]+final_tangential_velocity_vector_obj1[0] , final_normal_velocity_vector_obj1[1]+final_tangential_velocity_vector_obj1[1])
+        obj2.velocity = (final_normal_velocity_vector_obj2[0]+final_tangential_velocity_vector_obj2[0] , final_normal_velocity_vector_obj2[1]+ final_tangential_velocity_vector_obj2[1])
+
+
+        # if length_of_normal != 0:
+        #     normal = (normal[0]/length_of_normal,normal[1]/length_of_normal)
+        #     # find relative velocity between the two obkects
+
+        #     relative_velocity = (obj1.velocity[0]-obj2.velocity[0],obj1.velocity[1]-obj2.velocity[1])
+
+        #     # then find relative velocity along normal
+        #     relative_velocity_along_normal = relative_velocity[0] *normal[0] +relative_velocity[1] *normal[1]
+
+           
+        #     if relative_velocity_along_normal >0:
+        #         return #if the objects are not moving towards eachother then dont resolve
+            
+        #     #define coefficient of resitution. This determines how elastic the collision is.
+        #     e=0.5
+
+        #     # find impulse scalar
+        #     j = -(1+e) *relative_velocity_along_normal
+            
+        #     j /= (1/obj1.mass) + (1/obj2.mass)
+
+        #     # then find impulse
+
+        #     impulse = (j*normal[0],j*normal[1])
+
+        #     # then apply impulse to velocities
+
+        #     obj1.velocity = ((obj1.velocity[0]-impulse[0]), (obj1.velocity[1]-impulse[1]))
+
+        #     obj2.velocity = ((obj2.velocity[0]+impulse[0]), (obj2.velocity[1]+impulse[1]))
 
 
 
-    pass
+    
+
+
+
+
 class World(VectorMath):
     def __init__(self,objects,width,height):
         super().__init__()
@@ -77,6 +158,7 @@ class World(VectorMath):
             for object in self.objects[index+1:]:
                 collision = self.check_for_collision(obj,object)
                 if collision:
+                    self.collision_resolution(obj,object)
                     print("True")
 
 

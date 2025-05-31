@@ -12,7 +12,7 @@ clock = pygame.time.Clock()
 
 
 
-objects = [engine.Object((640,350),(75,0),1,(0,0),20),engine.Object((640,350),(-75,0),1,(0,0),20)]
+objects = [engine.Object((640,350),(75,0),1,(0,0),20),engine.Object((600,350),(-75,0),1,(0,0),20)]
 world = engine.World(objects,1280,700)
 
 start = time.time()
