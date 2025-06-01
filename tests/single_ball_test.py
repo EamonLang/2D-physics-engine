@@ -1,5 +1,7 @@
 import pygame
-
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import physics_mathlib.world as world
 import physics_mathlib.shape as shape
 import time
