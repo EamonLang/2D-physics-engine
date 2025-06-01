@@ -1,6 +1,7 @@
 import pygame
-import engine
+import version1.engine as engine
 import time
+import random
 
 pygame.init()
 
@@ -9,10 +10,15 @@ clock = pygame.time.Clock()
 
 
 
+# engine.Object((640,350),(75,0),1,(0,0),20),engine.Object((600,350),(-75,0),1,(0,0),20)
 
 
+objects = []
 
-objects = [engine.Object((640,350),(75,0),1,(0,0),20),engine.Object((600,350),(-75,0),1,(0,0),20)]
+
+for x in range(5):
+    mass_radius = random.randint(1,50)
+    objects.append(engine.Object((random.randint(20,1260),random.randint(20,680)),(random.randint(0,100),random.randint(0,100)),mass_radius,(0,0),mass_radius))
 world = engine.World(objects,1280,700)
 
 start = time.time()

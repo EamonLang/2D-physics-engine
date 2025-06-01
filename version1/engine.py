@@ -1,4 +1,5 @@
 import time
+from physics_mathlib import vector,utils,shape
 
 class Object:
     # position,velocity, and force should all be tuples with 2 float numbers. One for x and one for y coordinates
@@ -56,6 +57,8 @@ class VectorMath:
         normal = (obj1.position[0] - obj2.position[0],obj1.position[1]-obj2.position[1])
 
         # 1. B) Find the unit vector
+
+        # length between two objects
         length = (normal[0]**2 +normal[1]**2)**0.5
 
         unit_vector = (normal[0]/length,normal[1]/length)

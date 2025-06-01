@@ -3,3 +3,9 @@ venv/
 __pycache__/
 *.py[cod]
 *.so
+
+mathlib/__pycache__/
+*.py[cod]
+*.so
+
+.pytest_cache
