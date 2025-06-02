@@ -14,11 +14,14 @@ class Circle(Object):
     def __init__(self, position, velocity, force, mass,radius):
         super().__init__(position, velocity, force, mass)
         self.radius = radius
+        self.type = 'circle'
 
 
-class Square(Object):
-    def __init__(self, position, velocity, force, mass,width,height):
+class Rect(Object):
+    def __init__(self, position,velocity, force, mass,width,height):
         super().__init__(position, velocity, force, mass)
+        self.type = 'rect'
         self.height = height
         self.width = width
+        
 

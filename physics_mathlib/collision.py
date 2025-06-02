@@ -2,13 +2,26 @@
 from . import vector
 from . import utils
 
+def square_collision(obj1,obj2):
+      if obj1.position.x + obj1.width > obj2.position.x and obj1.position.x < obj2.position.x +obj2.width and obj1.position.y < obj2.position.y + obj2.height and obj1.position.y +obj1.height > obj2.position.y:
+            return True
+      else:
+            return False
+      pass
+
 def detect_collision(obj1,obj2):
-     combine_radius = obj1.radius + obj2.radius
-     distance_between = obj1.position.distance_to(obj2.position)
-     if distance_between <= combine_radius:
-          return True
-     else:
-          return False
+      if obj1.type == 'rect' and obj2.type == 'rect':
+           return square_collision(obj1,obj2)
+           pass
+          
+          
+      elif obj1.type == 'circle' and obj2.type == 'circle':
+          combine_radius = obj1.radius + obj2.radius
+          distance_between = obj1.position.distance_to(obj2.position)
+          if distance_between <= combine_radius:
+               return True
+          else:
+               return False
 
 def resolve_collision(obj1,obj2):
               
