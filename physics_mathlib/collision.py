@@ -29,8 +29,8 @@ def circle_square_collision(circle,square):
             testY = square.position.y 
             # test top
       
-      test = vector.Vector2D(circle.position.x-testX,circle.position.y-testY)
-      distance_between = utils.pythagorean_theorem(test.x,test.y)
+      test = vector.Vector2D(testX,testY)
+      distance_between = circle.position.distance_to(test)
 
       if distance_between<= circle.radius:
             return True

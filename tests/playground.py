@@ -15,18 +15,21 @@ clock = pygame.time.Clock()
 
 
 
-
+  
 
 objects = []
 
 rect1 = shape.Rect((640,350),(-100,0),(0,0),1,20,20)
 objects.append(rect1)
 
-rect2 = shape.Rect((600,350),(100,0),(0,0),1,20,20)
+rect2 = shape.Rect((600,350),(100,0),(0,0),0.1,20,20)
 objects.append(rect2)
 
 circ = shape.Circle((100,40),(250,-4),(0,0),25,25)
 objects.append(circ)
+
+circ2 = shape.Circle((640,100),(0,0),(0,0),10000,200)
+objects.append(circ2)
 earth = world.World(objects,1280,700)
 
 

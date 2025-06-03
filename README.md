@@ -5,7 +5,7 @@ I am following this article about how to create a physics engine in c++ however 
 Link for article: https://winter.dev/articles/physics-engine
 
 
-For object-object collisions the math I used was from this article: https://www.vobarian.com/collisions/2dcollisions2.pdf
+For object-object collisions the math I used was from this article: https://www.vobarian.com/collisions/2dcollisions2.pdf and this article: https://www.jeffreythompson.org/collision-detection/circle-rect.php
 
 Currently the engine supports collision between to circles aswell as gravity. Next I would like incorporate more shapes aswell as develop my own math library.
 
