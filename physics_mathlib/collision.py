@@ -8,12 +8,46 @@ def square_collision(obj1,obj2):
       else:
             return False
       pass
+def circle_square_collision(circle,square):
+      # check left and right side
+      testX = circle.position.x
+      testY = circle.position.y
+      if circle.position.x < square.position.x:
+            testX = square.position.x
+            # test left side
+            pass
+      elif circle.position.x > square.position.x + square.width:
+            testX = square.position.x + square.width
+            # test right side
+            pass
+      # check top and bottom
+      if circle.position.y < square.position.y + square.height:
+            testY = square.position.y + square.height
+            # test bottom
+            pass
+      elif circle.position.y > square.position.y:
+            testY = square.position.y 
+            # test top
+      
+      test = vector.Vector2D(circle.position.x-testX,circle.position.y-testY)
+      distance_between = utils.pythagorean_theorem(test.x,test.y)
+
+      if distance_between<= circle.radius:
+            return True
+      else:
+            return False
+      
+      
 
 def detect_collision(obj1,obj2):
       if obj1.type == 'rect' and obj2.type == 'rect':
            return square_collision(obj1,obj2)
-           pass
-          
+      
+      if obj1.type == 'circle' and obj2.type == 'rect': 
+            return circle_square_collision(obj1,obj2)
+      elif obj2.type == 'circle' and obj1.type == 'rect':
+            return circle_square_collision(obj2,obj1)
+      
           
       elif obj1.type == 'circle' and obj2.type == 'circle':
           combine_radius = obj1.radius + obj2.radius
