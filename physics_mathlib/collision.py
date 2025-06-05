@@ -2,6 +2,10 @@
 from . import vector
 from . import utils
 
+
+def circle_wall_collision(obj):
+      pass
+
 def square_collision(obj1,obj2):
       if obj1.position.x + obj1.width > obj2.position.x and obj1.position.x < obj2.position.x +obj2.width and obj1.position.y < obj2.position.y + obj2.height and obj1.position.y +obj1.height > obj2.position.y:
             return True

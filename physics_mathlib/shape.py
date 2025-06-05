@@ -1,4 +1,5 @@
 from . import vector
+from . import utils
 
 class Object:
     def __init__(self,position,velocity,force,mass):
@@ -15,6 +16,12 @@ class Circle(Object):
         super().__init__(position, velocity, force, mass)
         self.radius = radius
         self.type = 'circle'
+        self.inertia = 0.5* self.mass * (utils.square(self.radius))
+
+        self.angle = 0
+        self.angular_velocity = 0
+        self.torque = 0
+        
 
 
 class Rect(Object):

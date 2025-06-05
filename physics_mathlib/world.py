@@ -15,10 +15,18 @@ class World:
         f_gravity = vector.Vector2D(0,9.8)
         for index,obj in enumerate(self.objects_world):
             # check to see if object is within the world boundaries
-            if obj.position.x <= 0 or obj.position.x >= self.width:
-                obj.velocity = vector.Vector2D(-1 * obj.velocity.x,obj.velocity.y)
-            elif obj.position.y <= 0 or obj.position.y >= self.height:
-                obj.velocity = vector.Vector2D(obj.velocity.x, -1*obj.velocity.y)
+            if obj.type == 'rect':
+                if obj.position.x <= 0 or obj.position.x+obj.width >= self.width:
+                    obj.velocity = vector.Vector2D(-1 * obj.velocity.x,obj.velocity.y)
+                elif obj.position.y <= 0 or obj.position.y+obj.height >= self.height:
+                    obj.velocity = vector.Vector2D(obj.velocity.x, -1*obj.velocity.y)
+            
+            if obj.type == 'circle':
+                if obj.position.x-obj.radius <= 0 or obj.position.x + obj.radius>= self.width:
+                    obj.velocity = vector.Vector2D(-1 * obj.velocity.x,obj.velocity.y)
+                elif obj.position.y-obj.radius <= 0 or obj.position.y + obj.radius>=self.height:
+                    obj.velocity = vector.Vector2D(obj.velocity.x, -1*obj.velocity.y)
+
 
             
             # check if there is a collision with the other objects

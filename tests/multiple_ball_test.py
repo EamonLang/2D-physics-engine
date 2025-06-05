@@ -19,12 +19,10 @@ clock = pygame.time.Clock()
 
 
 objects = []
+for x in range(10):
+    objects.append(shape.Circle((random.randint(0,1280),random.randint(0,700)),(100,100),(0,0),5,20))
 
 
-circ1 = shape.Circle((640,350),(-100,0),(0,0),20,20)
-circ2 = shape.Circle((500,350),(100,0),(0,0),20,20)
-objects.append(circ1)
-objects.append(circ2)
 earth = world.World(objects,1280,700)
 
 
